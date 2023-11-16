@@ -7,9 +7,9 @@
 //
 // Code generated for Simulink model 'assignment4controller'.
 //
-// Model version                  : 1.1
+// Model version                  : 8.51
 // Simulink Coder version         : 23.2 (R2023b) 01-Aug-2023
-// C/C++ source code generated on : Wed Nov 15 20:58:56 2023
+// C/C++ source code generated on : Thu Nov 16 12:17:12 2023
 //
 // Target selection: ert.tlc
 // Embedded hardware selection: Generic->Unspecified (assume 32-bit Generic)

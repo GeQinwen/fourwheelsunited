@@ -3,9 +3,9 @@
 //
 // Code generated for Simulink model 'assignment4controller'.
 //
-// Model version                  : 1.1
+// Model version                  : 8.51
 // Simulink Coder version         : 23.2 (R2023b) 01-Aug-2023
-// C/C++ source code generated on : Wed Nov 15 20:59:09 2023
+// C/C++ source code generated on : Thu Nov 16 12:17:18 2023
 //
 
 #ifdef _MSC_VER
@@ -77,7 +77,7 @@ namespace ros
 
         // create scheduler timer to run the scheduler callback
         mSchedulerTimer = std::make_shared<ros::WallTimer>
-          (mNode->createWallTimer(ros::WallDuration(200000000*1e-9),
+          (mNode->createWallTimer(ros::WallDuration(50000000*1e-9),
             boost::bind(&NodeInterface::schedulerCallback, this, _1)));
         mSchedulerTimer->start();
       } catch (std::exception& ex) {

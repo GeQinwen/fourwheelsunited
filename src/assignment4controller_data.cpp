@@ -7,9 +7,9 @@
 //
 // Code generated for Simulink model 'assignment4controller'.
 //
-// Model version                  : 1.1
+// Model version                  : 8.51
 // Simulink Coder version         : 23.2 (R2023b) 01-Aug-2023
-// C/C++ source code generated on : Wed Nov 15 20:58:56 2023
+// C/C++ source code generated on : Thu Nov 16 12:17:12 2023
 //
 // Target selection: ert.tlc
 // Embedded hardware selection: Generic->Unspecified (assume 32-bit Generic)
@@ -21,169 +21,94 @@
 // Block parameters (default storage)
 P_assignment4controller_T assignment4controller_P = {
   // Mask Parameter: g1slow_D
-  //  Referenced by: '<S46>/Derivative Gain'
+  //  Referenced by: '<S39>/Derivative Gain'
 
   0.0,
 
   // Mask Parameter: g2fast_D
-  //  Referenced by: '<S94>/Derivative Gain'
+  //  Referenced by: '<S87>/Derivative Gain'
 
   0.0,
-
-  // Mask Parameter: g3emergency_D
-  //  Referenced by: '<S142>/Derivative Gain'
-
-  0.0,
-
-  // Mask Parameter: g3emergency_I
-  //  Referenced by: '<S145>/Integral Gain'
-
-  3.0,
 
   // Mask Parameter: g2fast_I
-  //  Referenced by: '<S97>/Integral Gain'
+  //  Referenced by: '<S90>/Integral Gain'
 
-  2.0,
+  0.0,
 
   // Mask Parameter: g1slow_I
-  //  Referenced by: '<S49>/Integral Gain'
+  //  Referenced by: '<S42>/Integral Gain'
 
-  1.5,
+  0.0,
 
   // Mask Parameter: g1slow_InitialConditionForFilte
-  //  Referenced by: '<S47>/Filter'
+  //  Referenced by: '<S40>/Filter'
 
   0.0,
 
   // Mask Parameter: g2fast_InitialConditionForFilte
-  //  Referenced by: '<S95>/Filter'
-
-  0.0,
-
-  // Mask Parameter: g3emergency_InitialConditionFor
-  //  Referenced by: '<S143>/Filter'
+  //  Referenced by: '<S88>/Filter'
 
   0.0,
 
   // Mask Parameter: g1slow_InitialConditionForInteg
-  //  Referenced by: '<S52>/Integrator'
+  //  Referenced by: '<S45>/Integrator'
 
   0.0,
 
   // Mask Parameter: g2fast_InitialConditionForInteg
-  //  Referenced by: '<S100>/Integrator'
+  //  Referenced by: '<S93>/Integrator'
 
   0.0,
-
-  // Mask Parameter: g3emergency_InitialConditionF_l
-  //  Referenced by: '<S148>/Integrator'
-
-  0.0,
-
-  // Mask Parameter: g3emergency_Kb
-  //  Referenced by: '<S141>/Kb'
-
-  1.0,
 
   // Mask Parameter: g2fast_Kb
-  //  Referenced by: '<S93>/Kb'
+  //  Referenced by: '<S86>/Kb'
 
   1.0,
 
   // Mask Parameter: g1slow_Kb
-  //  Referenced by: '<S45>/Kb'
+  //  Referenced by: '<S38>/Kb'
 
   1.0,
 
   // Mask Parameter: g1slow_LowerSaturationLimit
-  //  Referenced by: '<S59>/Saturation'
+  //  Referenced by: '<S52>/Saturation'
 
-  -3.0,
+  -0.25,
 
   // Mask Parameter: g2fast_LowerSaturationLimit
-  //  Referenced by: '<S107>/Saturation'
-
-  -3.0,
-
-  // Mask Parameter: g3emergency_LowerSaturationLimi
-  //  Referenced by: '<S155>/Saturation'
+  //  Referenced by: '<S100>/Saturation'
 
   -3.0,
 
   // Mask Parameter: g1slow_N
-  //  Referenced by: '<S55>/Filter Coefficient'
+  //  Referenced by: '<S48>/Filter Coefficient'
 
   100.0,
 
   // Mask Parameter: g2fast_N
-  //  Referenced by: '<S103>/Filter Coefficient'
-
-  100.0,
-
-  // Mask Parameter: g3emergency_N
-  //  Referenced by: '<S151>/Filter Coefficient'
+  //  Referenced by: '<S96>/Filter Coefficient'
 
   100.0,
 
   // Mask Parameter: g1slow_P
-  //  Referenced by: '<S57>/Proportional Gain'
+  //  Referenced by: '<S50>/Proportional Gain'
 
-  1.5,
+  0.05,
 
   // Mask Parameter: g2fast_P
-  //  Referenced by: '<S105>/Proportional Gain'
+  //  Referenced by: '<S98>/Proportional Gain'
 
   2.0,
 
-  // Mask Parameter: g3emergency_P
-  //  Referenced by: '<S153>/Proportional Gain'
-
-  3.0,
-
   // Mask Parameter: g1slow_UpperSaturationLimit
-  //  Referenced by: '<S59>/Saturation'
+  //  Referenced by: '<S52>/Saturation'
 
-  1.5,
+  0.2,
 
   // Mask Parameter: g2fast_UpperSaturationLimit
-  //  Referenced by: '<S107>/Saturation'
+  //  Referenced by: '<S100>/Saturation'
 
   1.5,
-
-  // Mask Parameter: g3emergency_UpperSaturationLimi
-  //  Referenced by: '<S155>/Saturation'
-
-  1.5,
-
-  // Mask Parameter: DeadMansSwitch1_stepSize
-  //  Referenced by: '<Root>/Dead Man's Switch1'
-
-  0.05,
-
-  // Mask Parameter: DeadMansSwitch_stepSize
-  //  Referenced by: '<Root>/Dead Man's Switch'
-
-  0.05,
-
-  // Mask Parameter: DeadMansSwitch2_stepSize
-  //  Referenced by: '<Root>/Dead Man's Switch2'
-
-  0.05,
-
-  // Mask Parameter: DeadMansSwitch1_timeout
-  //  Referenced by: '<Root>/Dead Man's Switch1'
-
-  0.4,
-
-  // Mask Parameter: DeadMansSwitch_timeout
-  //  Referenced by: '<Root>/Dead Man's Switch'
-
-  0.4,
-
-  // Mask Parameter: DeadMansSwitch2_timeout
-  //  Referenced by: '<Root>/Dead Man's Switch2'
-
-  0.4,
 
   // Computed Parameter: Constant_Value
   //  Referenced by: '<S1>/Constant'
@@ -193,81 +118,56 @@ P_assignment4controller_T assignment4controller_P = {
   },
 
   // Computed Parameter: Out1_Y0
-  //  Referenced by: '<S18>/Out1'
-
-  {
-    0.0                                // Data
-  },
-
-  // Computed Parameter: Constant_Value_e
-  //  Referenced by: '<S9>/Constant'
-
-  {
-    0.0                                // Data
-  },
-
-  // Computed Parameter: Out1_Y0_g
-  //  Referenced by: '<S19>/Out1'
+  //  Referenced by: '<S11>/Out1'
 
   {
     0.0                                // Data
   },
 
   // Computed Parameter: Constant_Value_k
-  //  Referenced by: '<S10>/Constant'
+  //  Referenced by: '<S6>/Constant'
 
   {
     0.0                                // Data
   },
 
-  // Computed Parameter: Out1_Y0_h
-  //  Referenced by: '<S20>/Out1'
+  // Computed Parameter: Out1_Y0_l
+  //  Referenced by: '<S12>/Out1'
 
   {
     0.0                                // Data
   },
 
-  // Computed Parameter: Constant_Value_o
-  //  Referenced by: '<S11>/Constant'
+  // Computed Parameter: Constant_Value_f
+  //  Referenced by: '<S7>/Constant'
 
   {
     0.0                                // Data
   },
 
-  // Computed Parameter: TransferFcn_A
-  //  Referenced by: '<Root>/Transfer Fcn'
+  // Computed Parameter: Out1_Y0_e
+  //  Referenced by: '<S13>/Out1'
 
-  -1.0,
+  {
+    0.0                                // Data
+  },
 
-  // Computed Parameter: TransferFcn_C
-  //  Referenced by: '<Root>/Transfer Fcn'
+  // Computed Parameter: Constant_Value_p
+  //  Referenced by: '<S8>/Constant'
 
-  3.0,
+  {
+    0.0                                // Data
+  },
+
+  // Expression: 4
+  //  Referenced by: '<Root>/Constant'
+
+  4.0,
 
   // Expression: 0.7
   //  Referenced by: '<Root>/Gain'
 
-  0.7,
-
-  // Expression: 10
-  //  Referenced by: '<Root>/Constant'
-
-  10.0,
-
-  // Expression: true
-  //  Referenced by: '<Root>/Constant2'
-
-  true,
-
-  // Expression: true
-  //  Referenced by: '<Root>/Constant1'
-
-  true,
-
-  // Expression: true
-  //  Referenced by: '<Root>/Constant3'
-
-  true
+  0.7
 };
 
 //

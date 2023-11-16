@@ -28,5 +28,5 @@
   #define ASSIGNMENT4CONTROLLER_PUBLIC_TYPE
 #endif
 #endif  // ASSIGNMENT4CONTROLLER__VISIBILITY_CONTROL_H_
-// Generated 15-Nov-2023 20:59:14
+// Generated 16-Nov-2023 12:17:21
 // Copyright 2019-2020 The MathWorks, Inc.

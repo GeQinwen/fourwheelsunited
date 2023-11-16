@@ -71,7 +71,7 @@ target_compile_options(assignment4controller PUBLIC
   $<$<OR:$<COMPILE_LANGUAGE:CXX>,$<COMPILE_LANGUAGE:C>>:
   -DMODEL=assignment4controller
   -DNUMST=2
-  -DNCSTATES=7
+  -DNCSTATES=4
   -DHAVESTDIO
   -DMODEL_HAS_DYNAMICALLY_LOADED_SFCNS=0
   -DCLASSIC_INTERFACE=0
@@ -123,4 +123,4 @@ add_custom_command(
                    ARGS -E copy ${PROJECT_SOURCE_DIR}/src/${file_i} ${CATKIN_DEVEL_PREFIX}/assignment4controller_ert_rtw/${file_i}
 				   )
 endforeach(file_i)
-# Generated on Wed Nov 15 20:59:14 2023
+# Generated on Thu Nov 16 12:17:21 2023
