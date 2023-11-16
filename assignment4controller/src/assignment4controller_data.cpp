@@ -7,9 +7,9 @@
 //
 // Code generated for Simulink model 'assignment4controller'.
 //
-// Model version                  : 1.2
+// Model version                  : 1.1
 // Simulink Coder version         : 23.2 (R2023b) 01-Aug-2023
-// C/C++ source code generated on : Wed Nov 15 14:19:27 2023
+// C/C++ source code generated on : Wed Nov 15 20:58:56 2023
 //
 // Target selection: ert.tlc
 // Embedded hardware selection: Generic->Unspecified (assume 32-bit Generic)
@@ -199,35 +199,35 @@ P_assignment4controller_T assignment4controller_P = {
     0.0                                // Data
   },
 
-  // Computed Parameter: Constant_Value_o
+  // Computed Parameter: Constant_Value_e
   //  Referenced by: '<S9>/Constant'
 
   {
     0.0                                // Data
   },
 
-  // Computed Parameter: Out1_Y0_j
+  // Computed Parameter: Out1_Y0_g
   //  Referenced by: '<S19>/Out1'
 
   {
     0.0                                // Data
   },
 
-  // Computed Parameter: Constant_Value_p
+  // Computed Parameter: Constant_Value_k
   //  Referenced by: '<S10>/Constant'
 
   {
     0.0                                // Data
   },
 
-  // Computed Parameter: Out1_Y0_c
+  // Computed Parameter: Out1_Y0_h
   //  Referenced by: '<S20>/Out1'
 
   {
     0.0                                // Data
   },
 
-  // Computed Parameter: Constant_Value_g
+  // Computed Parameter: Constant_Value_o
   //  Referenced by: '<S11>/Constant'
 
   {

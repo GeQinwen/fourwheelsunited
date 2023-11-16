@@ -3,9 +3,9 @@
 //
 // Code generated for Simulink model 'assignment4controller'.
 //
-// Model version                  : 1.2
+// Model version                  : 1.1
 // Simulink Coder version         : 23.2 (R2023b) 01-Aug-2023
-// C/C++ source code generated on : Wed Nov 15 14:19:42 2023
+// C/C++ source code generated on : Wed Nov 15 20:59:09 2023
 //
 
 #include <stdio.h>

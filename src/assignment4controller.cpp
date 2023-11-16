@@ -7,9 +7,9 @@
 //
 // Code generated for Simulink model 'assignment4controller'.
 //
-// Model version                  : 1.2
+// Model version                  : 1.1
 // Simulink Coder version         : 23.2 (R2023b) 01-Aug-2023
-// C/C++ source code generated on : Wed Nov 15 14:19:27 2023
+// C/C++ source code generated on : Wed Nov 15 20:58:56 2023
 //
 // Target selection: ert.tlc
 // Embedded hardware selection: Generic->Unspecified (assume 32-bit Generic)
@@ -19,6 +19,7 @@
 #include "assignment4controller.h"
 #include "rtwtypes.h"
 #include "assignment4controller_private.h"
+#include <math.h>
 #include "assignment4controller_types.h"
 
 // Block signals (default storage)
@@ -162,10 +163,10 @@ void assignment4contr_DeadMansSwitch(boolean_T rtu_IsNew, real_T rtu_value,
 void assignment4controller_step(void)
 {
   SL_Bus_assignment4controller_std_msgs_Float64 rtb_BusAssignment;
-  real_T rtb_Saturation_g;
-  real_T rtb_Saturation_n;
+  real_T rtb_Saturation_k;
+  real_T rtb_Saturation_o;
   real_T rtb_safeValue;
-  real_T rtb_safeValue_k;
+  real_T rtb_safeValue_g;
   real_T rtb_safeValue_p;
   real_T tmp;
   boolean_T rtb_timedOut_o;
@@ -185,7 +186,7 @@ void assignment4controller_step(void)
   if (rtmIsMajorTimeStep(assignment4controller_M)) {
     // Outputs for Atomic SubSystem: '<Root>/Subscribe'
     // MATLABSystem: '<S9>/SourceBlock'
-    rtb_timedOut_o = Sub_assignment4controller_106.getLatestMessage
+    rtb_timedOut_o = Sub_assignment4controller_50.getLatestMessage
       (&assignment4controller_B.b_varargout_2);
 
     // Outputs for Enabled SubSystem: '<S9>/Enabled Subsystem' incorporates:
@@ -194,7 +195,7 @@ void assignment4controller_step(void)
     // Start for MATLABSystem: '<S9>/SourceBlock'
     if (rtb_timedOut_o) {
       // SignalConversion generated from: '<S18>/In1'
-      assignment4controller_B.In1_b = assignment4controller_B.b_varargout_2;
+      assignment4controller_B.In1_d = assignment4controller_B.b_varargout_2;
     }
 
     // End of Start for MATLABSystem: '<S9>/SourceBlock'
@@ -205,7 +206,7 @@ void assignment4controller_step(void)
     // Outputs for Atomic SubSystem: '<Root>/Dead Man's Switch1'
     // Constant: '<Root>/Constant2'
     assignment4contr_DeadMansSwitch(assignment4controller_P.Constant2_Value,
-      assignment4controller_B.In1_b.Data, &rtb_safeValue_k, &rtb_timedOut_o,
+      assignment4controller_B.In1_d.Data, &rtb_safeValue_p, &rtb_timedOut_o,
       assignment4controller_P.DeadMansSwitch1_stepSize,
       assignment4controller_P.DeadMansSwitch1_timeout,
       &assignment4controller_DW.DeadMansSwitch1);
@@ -215,7 +216,7 @@ void assignment4controller_step(void)
 
     // Outputs for Atomic SubSystem: '<Root>/Subscribe2'
     // MATLABSystem: '<S11>/SourceBlock'
-    rtb_timedOut_o = Sub_assignment4controller_108.getLatestMessage
+    rtb_timedOut_o = Sub_assignment4controller_52.getLatestMessage
       (&assignment4controller_B.b_varargout_2);
 
     // Outputs for Enabled SubSystem: '<S11>/Enabled Subsystem' incorporates:
@@ -235,7 +236,7 @@ void assignment4controller_step(void)
     // Outputs for Atomic SubSystem: '<Root>/Dead Man's Switch'
     // Constant: '<Root>/Constant1'
     assignment4contr_DeadMansSwitch(assignment4controller_P.Constant1_Value,
-      assignment4controller_B.In1.Data, &rtb_safeValue_p, &rtb_timedOut_o,
+      assignment4controller_B.In1.Data, &rtb_safeValue_g, &rtb_timedOut_o,
       assignment4controller_P.DeadMansSwitch_stepSize,
       assignment4controller_P.DeadMansSwitch_timeout,
       &assignment4controller_DW.DeadMansSwitch);
@@ -245,7 +246,7 @@ void assignment4controller_step(void)
 
     // Outputs for Atomic SubSystem: '<Root>/Subscribe1'
     // MATLABSystem: '<S10>/SourceBlock'
-    rtb_timedOut_o = Sub_assignment4controller_107.getLatestMessage
+    rtb_timedOut_o = Sub_assignment4controller_51.getLatestMessage
       (&assignment4controller_B.b_varargout_2);
 
     // Outputs for Enabled SubSystem: '<S10>/Enabled Subsystem' incorporates:
@@ -254,7 +255,7 @@ void assignment4controller_step(void)
     // Start for MATLABSystem: '<S10>/SourceBlock'
     if (rtb_timedOut_o) {
       // SignalConversion generated from: '<S19>/In1'
-      assignment4controller_B.In1_i = assignment4controller_B.b_varargout_2;
+      assignment4controller_B.In1_m = assignment4controller_B.b_varargout_2;
     }
 
     // End of Start for MATLABSystem: '<S10>/SourceBlock'
@@ -265,7 +266,7 @@ void assignment4controller_step(void)
     // Outputs for Atomic SubSystem: '<Root>/Dead Man's Switch2'
     // Constant: '<Root>/Constant3'
     assignment4contr_DeadMansSwitch(assignment4controller_P.Constant3_Value,
-      assignment4controller_B.In1_i.Data, &rtb_safeValue, &rtb_timedOut_o,
+      assignment4controller_B.In1_m.Data, &rtb_safeValue, &rtb_timedOut_o,
       assignment4controller_P.DeadMansSwitch2_stepSize,
       assignment4controller_P.DeadMansSwitch2_timeout,
       &assignment4controller_DW.DeadMansSwitch2);
@@ -274,17 +275,25 @@ void assignment4controller_step(void)
     // End of Outputs for SubSystem: '<Root>/Dead Man's Switch2'
 
     // MATLAB Function: '<Root>/MATLAB Function2'
+    if (fabs(rtb_safeValue_p) < 1.0E-6) {
+      rtb_safeValue_p = 1.0E-6;
+    }
+
+    if (fabs(rtb_safeValue) < 1.0E-6) {
+      rtb_safeValue = 1.0E-6;
+    }
+
     if (rtb_safeValue < 0.1) {
-      assignment4controller_B.y = rtb_safeValue_p / rtb_safeValue_k;
+      assignment4controller_B.y = rtb_safeValue_g / rtb_safeValue_p;
     } else {
-      assignment4controller_B.y = rtb_safeValue_p / rtb_safeValue;
+      assignment4controller_B.y = rtb_safeValue_g / rtb_safeValue;
     }
 
     // End of MATLAB Function: '<Root>/MATLAB Function2'
   }
 
   // TransferFcn: '<Root>/Transfer Fcn'
-  rtb_safeValue_k = assignment4controller_P.TransferFcn_C *
+  rtb_safeValue_p = assignment4controller_P.TransferFcn_C *
     assignment4controller_X.TransferFcn_CSTATE;
 
   // Gain: '<S55>/Filter Coefficient' incorporates:
@@ -293,25 +302,25 @@ void assignment4controller_step(void)
   //   Sum: '<S47>/SumD'
 
   assignment4controller_B.FilterCoefficient = (assignment4controller_P.g1slow_D *
-    rtb_safeValue_k - assignment4controller_X.Filter_CSTATE) *
+    rtb_safeValue_p - assignment4controller_X.Filter_CSTATE) *
     assignment4controller_P.g1slow_N;
 
   // Sum: '<S61>/Sum' incorporates:
   //   Gain: '<S57>/Proportional Gain'
   //   Integrator: '<S52>/Integrator'
 
-  rtb_safeValue_p = (assignment4controller_P.g1slow_P * rtb_safeValue_k +
+  rtb_safeValue_g = (assignment4controller_P.g1slow_P * rtb_safeValue_p +
                      assignment4controller_X.Integrator_CSTATE) +
     assignment4controller_B.FilterCoefficient;
 
   // Saturate: '<S59>/Saturation'
-  if (rtb_safeValue_p > assignment4controller_P.g1slow_UpperSaturationLimit) {
+  if (rtb_safeValue_g > assignment4controller_P.g1slow_UpperSaturationLimit) {
     rtb_safeValue = assignment4controller_P.g1slow_UpperSaturationLimit;
-  } else if (rtb_safeValue_p <
+  } else if (rtb_safeValue_g <
              assignment4controller_P.g1slow_LowerSaturationLimit) {
     rtb_safeValue = assignment4controller_P.g1slow_LowerSaturationLimit;
   } else {
-    rtb_safeValue = rtb_safeValue_p;
+    rtb_safeValue = rtb_safeValue_g;
   }
 
   // End of Saturate: '<S59>/Saturation'
@@ -321,27 +330,27 @@ void assignment4controller_step(void)
   //   Integrator: '<S95>/Filter'
   //   Sum: '<S95>/SumD'
 
-  assignment4controller_B.FilterCoefficient_i =
-    (assignment4controller_P.g2fast_D * rtb_safeValue_k -
-     assignment4controller_X.Filter_CSTATE_h) * assignment4controller_P.g2fast_N;
+  assignment4controller_B.FilterCoefficient_d =
+    (assignment4controller_P.g2fast_D * rtb_safeValue_p -
+     assignment4controller_X.Filter_CSTATE_j) * assignment4controller_P.g2fast_N;
 
   // Sum: '<S109>/Sum' incorporates:
   //   Gain: '<S105>/Proportional Gain'
   //   Integrator: '<S100>/Integrator'
 
-  assignment4controller_B.Sum_n = (assignment4controller_P.g2fast_P *
-    rtb_safeValue_k + assignment4controller_X.Integrator_CSTATE_p) +
-    assignment4controller_B.FilterCoefficient_i;
+  assignment4controller_B.Sum_b = (assignment4controller_P.g2fast_P *
+    rtb_safeValue_p + assignment4controller_X.Integrator_CSTATE_j) +
+    assignment4controller_B.FilterCoefficient_d;
 
   // Saturate: '<S107>/Saturation'
-  if (assignment4controller_B.Sum_n >
+  if (assignment4controller_B.Sum_b >
       assignment4controller_P.g2fast_UpperSaturationLimit) {
-    rtb_Saturation_n = assignment4controller_P.g2fast_UpperSaturationLimit;
-  } else if (assignment4controller_B.Sum_n <
+    rtb_Saturation_k = assignment4controller_P.g2fast_UpperSaturationLimit;
+  } else if (assignment4controller_B.Sum_b <
              assignment4controller_P.g2fast_LowerSaturationLimit) {
-    rtb_Saturation_n = assignment4controller_P.g2fast_LowerSaturationLimit;
+    rtb_Saturation_k = assignment4controller_P.g2fast_LowerSaturationLimit;
   } else {
-    rtb_Saturation_n = assignment4controller_B.Sum_n;
+    rtb_Saturation_k = assignment4controller_B.Sum_b;
   }
 
   // End of Saturate: '<S107>/Saturation'
@@ -351,9 +360,9 @@ void assignment4controller_step(void)
   //   Integrator: '<S143>/Filter'
   //   Sum: '<S143>/SumD'
 
-  assignment4controller_B.FilterCoefficient_g =
-    (assignment4controller_P.g3emergency_D * rtb_safeValue_k -
-     assignment4controller_X.Filter_CSTATE_d) *
+  assignment4controller_B.FilterCoefficient_p =
+    (assignment4controller_P.g3emergency_D * rtb_safeValue_p -
+     assignment4controller_X.Filter_CSTATE_b) *
     assignment4controller_P.g3emergency_N;
 
   // Sum: '<S157>/Sum' incorporates:
@@ -361,18 +370,18 @@ void assignment4controller_step(void)
   //   Integrator: '<S148>/Integrator'
 
   assignment4controller_B.Sum_c = (assignment4controller_P.g3emergency_P *
-    rtb_safeValue_k + assignment4controller_X.Integrator_CSTATE_g) +
-    assignment4controller_B.FilterCoefficient_g;
+    rtb_safeValue_p + assignment4controller_X.Integrator_CSTATE_jp) +
+    assignment4controller_B.FilterCoefficient_p;
 
   // Saturate: '<S155>/Saturation'
   if (assignment4controller_B.Sum_c >
       assignment4controller_P.g3emergency_UpperSaturationLimi) {
-    rtb_Saturation_g = assignment4controller_P.g3emergency_UpperSaturationLimi;
+    rtb_Saturation_o = assignment4controller_P.g3emergency_UpperSaturationLimi;
   } else if (assignment4controller_B.Sum_c <
              assignment4controller_P.g3emergency_LowerSaturationLimi) {
-    rtb_Saturation_g = assignment4controller_P.g3emergency_LowerSaturationLimi;
+    rtb_Saturation_o = assignment4controller_P.g3emergency_LowerSaturationLimi;
   } else {
-    rtb_Saturation_g = assignment4controller_B.Sum_c;
+    rtb_Saturation_o = assignment4controller_B.Sum_c;
   }
 
   // End of Saturate: '<S155>/Saturation'
@@ -381,9 +390,9 @@ void assignment4controller_step(void)
   if (assignment4controller_B.y > 10.0) {
     tmp = rtb_safeValue;
   } else if (assignment4controller_B.y > 5.0) {
-    tmp = rtb_Saturation_n;
+    tmp = rtb_Saturation_k;
   } else {
-    tmp = rtb_Saturation_g;
+    tmp = rtb_Saturation_o;
   }
 
   // BusAssignment: '<Root>/Bus Assignment' incorporates:
@@ -394,7 +403,7 @@ void assignment4controller_step(void)
 
   // Outputs for Atomic SubSystem: '<Root>/Publish'
   // MATLABSystem: '<S8>/SinkBlock'
-  Pub_assignment4controller_109.publish(&rtb_BusAssignment);
+  Pub_assignment4controller_55.publish(&rtb_BusAssignment);
 
   // End of Outputs for SubSystem: '<Root>/Publish'
 
@@ -403,33 +412,33 @@ void assignment4controller_step(void)
   //   Gain: '<S145>/Integral Gain'
   //   Sum: '<S141>/SumI2'
 
-  assignment4controller_B.SumI4 = (rtb_Saturation_g -
+  assignment4controller_B.SumI4 = (rtb_Saturation_o -
     assignment4controller_B.Sum_c) * assignment4controller_P.g3emergency_Kb +
-    assignment4controller_P.g3emergency_I * rtb_safeValue_k;
+    assignment4controller_P.g3emergency_I * rtb_safeValue_p;
 
   // Sum: '<S93>/SumI4' incorporates:
   //   Gain: '<S93>/Kb'
   //   Gain: '<S97>/Integral Gain'
   //   Sum: '<S93>/SumI2'
 
-  assignment4controller_B.SumI4_n = (rtb_Saturation_n -
-    assignment4controller_B.Sum_n) * assignment4controller_P.g2fast_Kb +
-    assignment4controller_P.g2fast_I * rtb_safeValue_k;
+  assignment4controller_B.SumI4_b = (rtb_Saturation_k -
+    assignment4controller_B.Sum_b) * assignment4controller_P.g2fast_Kb +
+    assignment4controller_P.g2fast_I * rtb_safeValue_p;
 
   // Sum: '<S45>/SumI4' incorporates:
   //   Gain: '<S45>/Kb'
   //   Gain: '<S49>/Integral Gain'
   //   Sum: '<S45>/SumI2'
 
-  assignment4controller_B.SumI4_p = (rtb_safeValue - rtb_safeValue_p) *
+  assignment4controller_B.SumI4_h = (rtb_safeValue - rtb_safeValue_g) *
     assignment4controller_P.g1slow_Kb + assignment4controller_P.g1slow_I *
-    rtb_safeValue_k;
+    rtb_safeValue_p;
   if (rtmIsMajorTimeStep(assignment4controller_M)) {
     // MATLAB Function: '<Root>/MATLAB Function' incorporates:
     //   Constant: '<Root>/Constant'
 
-    assignment4controller_B.y_c = assignment4controller_B.y -
-      assignment4controller_P.Constant_Value_d;
+    assignment4controller_B.y_n = assignment4controller_B.y -
+      assignment4controller_P.Constant_Value_a;
   }
 
   if (rtmIsMajorTimeStep(assignment4controller_M)) {
@@ -466,25 +475,25 @@ void assignment4controller_derivatives(void)
   // Derivatives for TransferFcn: '<Root>/Transfer Fcn'
   _rtXdot->TransferFcn_CSTATE = assignment4controller_P.TransferFcn_A *
     assignment4controller_X.TransferFcn_CSTATE;
-  _rtXdot->TransferFcn_CSTATE += assignment4controller_B.y_c;
+  _rtXdot->TransferFcn_CSTATE += assignment4controller_B.y_n;
 
   // Derivatives for Integrator: '<S52>/Integrator'
-  _rtXdot->Integrator_CSTATE = assignment4controller_B.SumI4_p;
+  _rtXdot->Integrator_CSTATE = assignment4controller_B.SumI4_h;
 
   // Derivatives for Integrator: '<S47>/Filter'
   _rtXdot->Filter_CSTATE = assignment4controller_B.FilterCoefficient;
 
   // Derivatives for Integrator: '<S100>/Integrator'
-  _rtXdot->Integrator_CSTATE_p = assignment4controller_B.SumI4_n;
+  _rtXdot->Integrator_CSTATE_j = assignment4controller_B.SumI4_b;
 
   // Derivatives for Integrator: '<S95>/Filter'
-  _rtXdot->Filter_CSTATE_h = assignment4controller_B.FilterCoefficient_i;
+  _rtXdot->Filter_CSTATE_j = assignment4controller_B.FilterCoefficient_d;
 
   // Derivatives for Integrator: '<S148>/Integrator'
-  _rtXdot->Integrator_CSTATE_g = assignment4controller_B.SumI4;
+  _rtXdot->Integrator_CSTATE_jp = assignment4controller_B.SumI4;
 
   // Derivatives for Integrator: '<S143>/Filter'
-  _rtXdot->Filter_CSTATE_d = assignment4controller_B.FilterCoefficient_g;
+  _rtXdot->Filter_CSTATE_b = assignment4controller_B.FilterCoefficient_p;
 }
 
 // Model initialize function
@@ -560,19 +569,19 @@ void assignment4controller_initialize(void)
       assignment4controller_P.g1slow_InitialConditionForFilte;
 
     // InitializeConditions for Integrator: '<S100>/Integrator'
-    assignment4controller_X.Integrator_CSTATE_p =
+    assignment4controller_X.Integrator_CSTATE_j =
       assignment4controller_P.g2fast_InitialConditionForInteg;
 
     // InitializeConditions for Integrator: '<S95>/Filter'
-    assignment4controller_X.Filter_CSTATE_h =
+    assignment4controller_X.Filter_CSTATE_j =
       assignment4controller_P.g2fast_InitialConditionForFilte;
 
     // InitializeConditions for Integrator: '<S148>/Integrator'
-    assignment4controller_X.Integrator_CSTATE_g =
+    assignment4controller_X.Integrator_CSTATE_jp =
       assignment4controller_P.g3emergency_InitialConditionF_l;
 
     // InitializeConditions for Integrator: '<S143>/Filter'
-    assignment4controller_X.Filter_CSTATE_d =
+    assignment4controller_X.Filter_CSTATE_b =
       assignment4controller_P.g3emergency_InitialConditionFor;
 
     // SystemInitialize for Atomic SubSystem: '<Root>/Subscribe'
@@ -580,19 +589,19 @@ void assignment4controller_initialize(void)
     // SystemInitialize for SignalConversion generated from: '<S18>/In1' incorporates:
     //   Outport: '<S18>/Out1'
 
-    assignment4controller_B.In1_b = assignment4controller_P.Out1_Y0;
+    assignment4controller_B.In1_d = assignment4controller_P.Out1_Y0;
 
     // End of SystemInitialize for SubSystem: '<S9>/Enabled Subsystem'
 
     // Start for MATLABSystem: '<S9>/SourceBlock'
-    assignment4controller_DW.obj_m.matlabCodegenIsDeleted = false;
-    assignment4controller_DW.obj_m.isInitialized = 1;
+    assignment4controller_DW.obj_k.matlabCodegenIsDeleted = false;
+    assignment4controller_DW.obj_k.isInitialized = 1;
     for (i = 0; i < 17; i++) {
       b_zeroDelimTopic[i] = b_zeroDelimTopic_3[i];
     }
 
-    Sub_assignment4controller_106.createSubscriber(&b_zeroDelimTopic[0], 1);
-    assignment4controller_DW.obj_m.isSetupComplete = true;
+    Sub_assignment4controller_50.createSubscriber(&b_zeroDelimTopic[0], 1);
+    assignment4controller_DW.obj_k.isSetupComplete = true;
 
     // End of Start for MATLABSystem: '<S9>/SourceBlock'
     // End of SystemInitialize for SubSystem: '<Root>/Subscribe'
@@ -602,19 +611,19 @@ void assignment4controller_initialize(void)
     // SystemInitialize for SignalConversion generated from: '<S20>/In1' incorporates:
     //   Outport: '<S20>/Out1'
 
-    assignment4controller_B.In1 = assignment4controller_P.Out1_Y0_c;
+    assignment4controller_B.In1 = assignment4controller_P.Out1_Y0_h;
 
     // End of SystemInitialize for SubSystem: '<S11>/Enabled Subsystem'
 
     // Start for MATLABSystem: '<S11>/SourceBlock'
-    assignment4controller_DW.obj_f.matlabCodegenIsDeleted = false;
-    assignment4controller_DW.obj_f.isInitialized = 1;
+    assignment4controller_DW.obj_e.matlabCodegenIsDeleted = false;
+    assignment4controller_DW.obj_e.isInitialized = 1;
     for (i = 0; i < 11; i++) {
       b_zeroDelimTopic_0[i] = b_zeroDelimTopic_4[i];
     }
 
-    Sub_assignment4controller_108.createSubscriber(&b_zeroDelimTopic_0[0], 1);
-    assignment4controller_DW.obj_f.isSetupComplete = true;
+    Sub_assignment4controller_52.createSubscriber(&b_zeroDelimTopic_0[0], 1);
+    assignment4controller_DW.obj_e.isSetupComplete = true;
 
     // End of Start for MATLABSystem: '<S11>/SourceBlock'
     // End of SystemInitialize for SubSystem: '<Root>/Subscribe2'
@@ -624,19 +633,19 @@ void assignment4controller_initialize(void)
     // SystemInitialize for SignalConversion generated from: '<S19>/In1' incorporates:
     //   Outport: '<S19>/Out1'
 
-    assignment4controller_B.In1_i = assignment4controller_P.Out1_Y0_j;
+    assignment4controller_B.In1_m = assignment4controller_P.Out1_Y0_g;
 
     // End of SystemInitialize for SubSystem: '<S10>/Enabled Subsystem'
 
     // Start for MATLABSystem: '<S10>/SourceBlock'
-    assignment4controller_DW.obj_l.matlabCodegenIsDeleted = false;
-    assignment4controller_DW.obj_l.isInitialized = 1;
+    assignment4controller_DW.obj_j.matlabCodegenIsDeleted = false;
+    assignment4controller_DW.obj_j.isInitialized = 1;
     for (i = 0; i < 9; i++) {
       b_zeroDelimTopic_1[i] = b_zeroDelimTopic_5[i];
     }
 
-    Sub_assignment4controller_107.createSubscriber(&b_zeroDelimTopic_1[0], 1);
-    assignment4controller_DW.obj_l.isSetupComplete = true;
+    Sub_assignment4controller_51.createSubscriber(&b_zeroDelimTopic_1[0], 1);
+    assignment4controller_DW.obj_j.isSetupComplete = true;
 
     // End of Start for MATLABSystem: '<S10>/SourceBlock'
     // End of SystemInitialize for SubSystem: '<Root>/Subscribe1'
@@ -649,7 +658,7 @@ void assignment4controller_initialize(void)
       b_zeroDelimTopic_2[i] = b_zeroDelimTopic_6[i];
     }
 
-    Pub_assignment4controller_109.createPublisher(&b_zeroDelimTopic_2[0], 1);
+    Pub_assignment4controller_55.createPublisher(&b_zeroDelimTopic_2[0], 1);
     assignment4controller_DW.obj.isSetupComplete = true;
 
     // End of Start for MATLABSystem: '<S8>/SinkBlock'
@@ -662,8 +671,8 @@ void assignment4controller_terminate(void)
 {
   // Terminate for Atomic SubSystem: '<Root>/Subscribe'
   // Terminate for MATLABSystem: '<S9>/SourceBlock'
-  if (!assignment4controller_DW.obj_m.matlabCodegenIsDeleted) {
-    assignment4controller_DW.obj_m.matlabCodegenIsDeleted = true;
+  if (!assignment4controller_DW.obj_k.matlabCodegenIsDeleted) {
+    assignment4controller_DW.obj_k.matlabCodegenIsDeleted = true;
   }
 
   // End of Terminate for MATLABSystem: '<S9>/SourceBlock'
@@ -671,8 +680,8 @@ void assignment4controller_terminate(void)
 
   // Terminate for Atomic SubSystem: '<Root>/Subscribe2'
   // Terminate for MATLABSystem: '<S11>/SourceBlock'
-  if (!assignment4controller_DW.obj_f.matlabCodegenIsDeleted) {
-    assignment4controller_DW.obj_f.matlabCodegenIsDeleted = true;
+  if (!assignment4controller_DW.obj_e.matlabCodegenIsDeleted) {
+    assignment4controller_DW.obj_e.matlabCodegenIsDeleted = true;
   }
 
   // End of Terminate for MATLABSystem: '<S11>/SourceBlock'
@@ -680,8 +689,8 @@ void assignment4controller_terminate(void)
 
   // Terminate for Atomic SubSystem: '<Root>/Subscribe1'
   // Terminate for MATLABSystem: '<S10>/SourceBlock'
-  if (!assignment4controller_DW.obj_l.matlabCodegenIsDeleted) {
-    assignment4controller_DW.obj_l.matlabCodegenIsDeleted = true;
+  if (!assignment4controller_DW.obj_j.matlabCodegenIsDeleted) {
+    assignment4controller_DW.obj_j.matlabCodegenIsDeleted = true;
   }
 
   // End of Terminate for MATLABSystem: '<S10>/SourceBlock'

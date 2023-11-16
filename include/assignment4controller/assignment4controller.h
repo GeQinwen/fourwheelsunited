@@ -7,9 +7,9 @@
 //
 // Code generated for Simulink model 'assignment4controller'.
 //
-// Model version                  : 1.2
+// Model version                  : 1.1
 // Simulink Coder version         : 23.2 (R2023b) 01-Aug-2023
-// C/C++ source code generated on : Wed Nov 15 14:19:27 2023
+// C/C++ source code generated on : Wed Nov 15 20:58:56 2023
 //
 // Target selection: ert.tlc
 // Embedded hardware selection: Generic->Unspecified (assume 32-bit Generic)
@@ -156,27 +156,27 @@ struct DW_DeadMansSwitch_assignment4_T {
 // Block signals (default storage)
 struct B_assignment4controller_T {
   real_T FilterCoefficient;            // '<S55>/Filter Coefficient'
-  real_T FilterCoefficient_i;          // '<S103>/Filter Coefficient'
-  real_T FilterCoefficient_g;          // '<S151>/Filter Coefficient'
+  real_T FilterCoefficient_d;          // '<S103>/Filter Coefficient'
+  real_T FilterCoefficient_p;          // '<S151>/Filter Coefficient'
   real_T SumI4;                        // '<S141>/SumI4'
-  real_T SumI4_n;                      // '<S93>/SumI4'
-  real_T SumI4_p;                      // '<S45>/SumI4'
+  real_T SumI4_b;                      // '<S93>/SumI4'
+  real_T SumI4_h;                      // '<S45>/SumI4'
   real_T y;                            // '<Root>/MATLAB Function2'
-  real_T y_c;                          // '<Root>/MATLAB Function'
-  real_T Sum_n;                        // '<S109>/Sum'
+  real_T y_n;                          // '<Root>/MATLAB Function'
+  real_T Sum_b;                        // '<S109>/Sum'
   real_T Sum_c;                        // '<S157>/Sum'
   SL_Bus_assignment4controller_std_msgs_Float64 In1;// '<S20>/In1'
-  SL_Bus_assignment4controller_std_msgs_Float64 In1_i;// '<S19>/In1'
-  SL_Bus_assignment4controller_std_msgs_Float64 In1_b;// '<S18>/In1'
+  SL_Bus_assignment4controller_std_msgs_Float64 In1_m;// '<S19>/In1'
+  SL_Bus_assignment4controller_std_msgs_Float64 In1_d;// '<S18>/In1'
   SL_Bus_assignment4controller_std_msgs_Float64 b_varargout_2;
 };
 
 // Block states (default storage) for system '<Root>'
 struct DW_assignment4controller_T {
   ros_slroscpp_internal_block_P_T obj; // '<S8>/SinkBlock'
-  ros_slroscpp_internal_block_S_T obj_f;// '<S11>/SourceBlock'
-  ros_slroscpp_internal_block_S_T obj_l;// '<S10>/SourceBlock'
-  ros_slroscpp_internal_block_S_T obj_m;// '<S9>/SourceBlock'
+  ros_slroscpp_internal_block_S_T obj_e;// '<S11>/SourceBlock'
+  ros_slroscpp_internal_block_S_T obj_j;// '<S10>/SourceBlock'
+  ros_slroscpp_internal_block_S_T obj_k;// '<S9>/SourceBlock'
   DW_DeadMansSwitch_assignment4_T DeadMansSwitch2;// '<Root>/Dead Man's Switch2' 
   DW_DeadMansSwitch_assignment4_T DeadMansSwitch1;// '<Root>/Dead Man's Switch1' 
   DW_DeadMansSwitch_assignment4_T DeadMansSwitch;// '<Root>/Dead Man's Switch'
@@ -187,10 +187,10 @@ struct X_assignment4controller_T {
   real_T TransferFcn_CSTATE;           // '<Root>/Transfer Fcn'
   real_T Integrator_CSTATE;            // '<S52>/Integrator'
   real_T Filter_CSTATE;                // '<S47>/Filter'
-  real_T Integrator_CSTATE_p;          // '<S100>/Integrator'
-  real_T Filter_CSTATE_h;              // '<S95>/Filter'
-  real_T Integrator_CSTATE_g;          // '<S148>/Integrator'
-  real_T Filter_CSTATE_d;              // '<S143>/Filter'
+  real_T Integrator_CSTATE_j;          // '<S100>/Integrator'
+  real_T Filter_CSTATE_j;              // '<S95>/Filter'
+  real_T Integrator_CSTATE_jp;         // '<S148>/Integrator'
+  real_T Filter_CSTATE_b;              // '<S143>/Filter'
 };
 
 // State derivatives (default storage)
@@ -198,10 +198,10 @@ struct XDot_assignment4controller_T {
   real_T TransferFcn_CSTATE;           // '<Root>/Transfer Fcn'
   real_T Integrator_CSTATE;            // '<S52>/Integrator'
   real_T Filter_CSTATE;                // '<S47>/Filter'
-  real_T Integrator_CSTATE_p;          // '<S100>/Integrator'
-  real_T Filter_CSTATE_h;              // '<S95>/Filter'
-  real_T Integrator_CSTATE_g;          // '<S148>/Integrator'
-  real_T Filter_CSTATE_d;              // '<S143>/Filter'
+  real_T Integrator_CSTATE_j;          // '<S100>/Integrator'
+  real_T Filter_CSTATE_j;              // '<S95>/Filter'
+  real_T Integrator_CSTATE_jp;         // '<S148>/Integrator'
+  real_T Filter_CSTATE_b;              // '<S143>/Filter'
 };
 
 // State disabled
@@ -209,10 +209,10 @@ struct XDis_assignment4controller_T {
   boolean_T TransferFcn_CSTATE;        // '<Root>/Transfer Fcn'
   boolean_T Integrator_CSTATE;         // '<S52>/Integrator'
   boolean_T Filter_CSTATE;             // '<S47>/Filter'
-  boolean_T Integrator_CSTATE_p;       // '<S100>/Integrator'
-  boolean_T Filter_CSTATE_h;           // '<S95>/Filter'
-  boolean_T Integrator_CSTATE_g;       // '<S148>/Integrator'
-  boolean_T Filter_CSTATE_d;           // '<S143>/Filter'
+  boolean_T Integrator_CSTATE_j;       // '<S100>/Integrator'
+  boolean_T Filter_CSTATE_j;           // '<S95>/Filter'
+  boolean_T Integrator_CSTATE_jp;      // '<S148>/Integrator'
+  boolean_T Filter_CSTATE_b;           // '<S143>/Filter'
 };
 
 #ifndef ODE3_INTG
@@ -345,19 +345,19 @@ struct P_assignment4controller_T_ {
   SL_Bus_assignment4controller_std_msgs_Float64 Out1_Y0;// Computed Parameter: Out1_Y0
                                                            //  Referenced by: '<S18>/Out1'
 
-  SL_Bus_assignment4controller_std_msgs_Float64 Constant_Value_o;// Computed Parameter: Constant_Value_o
+  SL_Bus_assignment4controller_std_msgs_Float64 Constant_Value_e;// Computed Parameter: Constant_Value_e
                                                                     //  Referenced by: '<S9>/Constant'
 
-  SL_Bus_assignment4controller_std_msgs_Float64 Out1_Y0_j;// Computed Parameter: Out1_Y0_j
+  SL_Bus_assignment4controller_std_msgs_Float64 Out1_Y0_g;// Computed Parameter: Out1_Y0_g
                                                              //  Referenced by: '<S19>/Out1'
 
-  SL_Bus_assignment4controller_std_msgs_Float64 Constant_Value_p;// Computed Parameter: Constant_Value_p
+  SL_Bus_assignment4controller_std_msgs_Float64 Constant_Value_k;// Computed Parameter: Constant_Value_k
                                                                     //  Referenced by: '<S10>/Constant'
 
-  SL_Bus_assignment4controller_std_msgs_Float64 Out1_Y0_c;// Computed Parameter: Out1_Y0_c
+  SL_Bus_assignment4controller_std_msgs_Float64 Out1_Y0_h;// Computed Parameter: Out1_Y0_h
                                                              //  Referenced by: '<S20>/Out1'
 
-  SL_Bus_assignment4controller_std_msgs_Float64 Constant_Value_g;// Computed Parameter: Constant_Value_g
+  SL_Bus_assignment4controller_std_msgs_Float64 Constant_Value_o;// Computed Parameter: Constant_Value_o
                                                                     //  Referenced by: '<S11>/Constant'
 
   real_T TransferFcn_A;                // Computed Parameter: TransferFcn_A
@@ -369,7 +369,7 @@ struct P_assignment4controller_T_ {
   real_T Gain_Gain;                    // Expression: 0.7
                                           //  Referenced by: '<Root>/Gain'
 
-  real_T Constant_Value_d;             // Expression: 10
+  real_T Constant_Value_a;             // Expression: 10
                                           //  Referenced by: '<Root>/Constant'
 
   boolean_T Constant2_Value;           // Expression: true
