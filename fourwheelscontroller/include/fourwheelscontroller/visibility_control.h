@@ -1,0 +1,32 @@
+#ifndef FOURWHEELSCONTROLLER__VISIBILITY_CONTROL_H_
+#define FOURWHEELSCONTROLLER__VISIBILITY_CONTROL_H_
+#if defined _WIN32 || defined __CYGWIN__
+  #ifdef __GNUC__
+    #define FOURWHEELSCONTROLLER_EXPORT __attribute__ ((dllexport))
+    #define FOURWHEELSCONTROLLER_IMPORT __attribute__ ((dllimport))
+  #else
+    #define FOURWHEELSCONTROLLER_EXPORT __declspec(dllexport)
+    #define FOURWHEELSCONTROLLER_IMPORT __declspec(dllimport)
+  #endif
+  #ifdef FOURWHEELSCONTROLLER_BUILDING_LIBRARY
+    #define FOURWHEELSCONTROLLER_PUBLIC FOURWHEELSCONTROLLER_EXPORT
+  #else
+    #define FOURWHEELSCONTROLLER_PUBLIC FOURWHEELSCONTROLLER_IMPORT
+  #endif
+  #define FOURWHEELSCONTROLLER_PUBLIC_TYPE FOURWHEELSCONTROLLER_PUBLIC
+  #define FOURWHEELSCONTROLLER_LOCAL
+#else
+  #define FOURWHEELSCONTROLLER_EXPORT __attribute__ ((visibility("default")))
+  #define FOURWHEELSCONTROLLER_IMPORT
+  #if __GNUC__ >= 4
+    #define FOURWHEELSCONTROLLER_PUBLIC __attribute__ ((visibility("default")))
+    #define FOURWHEELSCONTROLLER_LOCAL  __attribute__ ((visibility("hidden")))
+  #else
+    #define FOURWHEELSCONTROLLER_PUBLIC
+    #define FOURWHEELSCONTROLLER_LOCAL
+  #endif
+  #define FOURWHEELSCONTROLLER_PUBLIC_TYPE
+#endif
+#endif  // FOURWHEELSCONTROLLER__VISIBILITY_CONTROL_H_
+// Generated 29-Nov-2023 21:20:37
+// Copyright 2019-2020 The MathWorks, Inc.
